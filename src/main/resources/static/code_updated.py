@@ -11,6 +11,7 @@ from datetime import datetime
 from P4 import P4
 import subprocess
 
+#Mentioning this directory for cx_Oracle to work. 
 os.chdir('C:\instantclient_11_2')
 args=sys.argv[1:]
 timecurrent=datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
