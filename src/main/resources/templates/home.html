@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-<title>Artifact Comparison</title>
+<title>Artifact Comparator</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script type="text/javascript"
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	
 <script type="text/javascript">
 	$(function() {
 		$("#cases").change(function() {
@@ -28,13 +30,21 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </head>
 <body>
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Artifact Comparator</a>
+			</div>
 
-	<div class="page-header">
-		<h1>Sync-up Automation</h1>
-		<p>This tool is used to validate the artifacts deployed in all Non CD/CI instances.</p>
-	</div>
+		</div>
+	</nav>
+	<!-- <div class="page-header">
+		<h1>Artifact Comparator</h1>
+		<p>This tool is used to validate the artifacts deployed in CD/CI and all Non CD/CI instances.</p>
+	</div> -->
 
 	<div class="container">
 
@@ -42,41 +52,45 @@
 			method="post">
 			<p>
 			<div class="form-group mx-sm-3 mb-2">
-				<label for="cases">Compare using options below</label>
-				 <select
-					class="form-control" name="cases" id="cases" th:field="*{selection_type}">
+				<label for="cases">Compare using options below</label> <select
+					class="form-control" name="cases" id="cases"
+					th:field="*{selection_type}">
 					<option value="date">Date</option>
-					<option value="us">User Story</option>
+					<option value="us">User_Story</option>
 
+				</select><br> <select class="form-control" name="envs" id="env"
+					th:field="*{env_name}">
+					<option value="dev11">dev11</option>
+					<option th:each="env : ${env_var}" th:value="${env}"
+						th:text="${env}"></option>
 				</select><br>
 
-				<input class="form-control" type="text" th:field="*{env_name}" placeholder="Env Name"><br>
-				<label for="Email">Please enter the email you want to receive the comparison report</label>
-				<input class="form-control" type="text" th:field="*{email}" placeholder="Email"><br>
+				<!-- <input class="form-control" type="text" th:field="*{env_name}" placeholder="Env Name"><br> -->
+				<label for="Email">Please enter the email you want to
+					receive the comparison report</label> <input class="form-control"
+					type="text" th:field="*{email}" placeholder="Email"><br>
 
 				<div class="date" id="date">
 
-					
-					 <br>
-					 <label for="From Date">From Date</label>
-					 <input class="form-control" type="date" th:field="*{fromdate}" placeholder="From Date">
-					 <br> 
-					 <label	for="From Date">To Date</label> 
-					 <input class="form-control"	type="date" th:field="*{todate}" placeholder="To Date">
-					 <br>
+
+					<br> <label for="From Date">From Date</label> <input
+						class="form-control" type="date" th:field="*{fromdate}"
+						placeholder="From Date"> <br> <label for="From Date">To
+						Date</label> <input class="form-control" type="date" th:field="*{todate}"
+						placeholder="To Date"> <br>
 				</div>
 
 				<div class="us" id="us" style="display: none">
-					<br> 
-					<input class="form-control" type="text" th:field="*{user_story}" id = "User Story" placeholder="User Story"/><br>
+					<br> <input class="form-control" type="text"
+						th:field="*{user_story}" id="User Story" placeholder="User Story" /><br>
 				</div>
 
 
 
 				<p>
-				
-					<input class="submit" type="submit" value="Compare" /> <input type="reset"
-						value="Reset" />
+
+					<input class="submit" type="submit" value="Compare" /> <input
+						type="reset" value="Reset" />
 				</p>
 			</div>
 		</form>
