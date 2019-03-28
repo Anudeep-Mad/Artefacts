@@ -3,7 +3,23 @@ package com.devops.artefact.model;
 public class EnvModel {
 	
 
-	private String selection_type,env_name,fromdate,todate,user_story,email;
+	private String selection_type,env_name_cd_ci, env_name,fromdate,todate,user_story,email,env_type;
+
+	public String getEnv_name_cd_ci() {
+		return env_name_cd_ci;
+	}
+
+	public void setEnv_name_cd_ci(String env_name_cd_ci) {
+		this.env_name_cd_ci = env_name_cd_ci;
+	}
+
+	public String getEnv_type() {
+		return env_type;
+	}
+
+	public void setEnv_type(String env_type) {
+		this.env_type = env_type;
+	}
 
 	public String getUser_story() {
 		return user_story;

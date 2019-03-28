@@ -43,7 +43,10 @@ public class ArtifactService {
 	
 	public void Compare_2(EnvModel envModel, String file_name) throws IOException {
 		if(envModel.getSelection_type().equals("date")) {
-			command="python3.4 " + "artifact_comparator.py " + envModel.getEnv_name()+" "+ file_name +" "+ envModel.getFromdate()+" "+envModel.getTodate()+" "+envModel.getEmail();
+			if(envModel.getEnv_type().equals("Non-CD/CI"))
+				command="python3.4 " + "artifact_comparator.py " + envModel.getEnv_name()+" "+envModel.getEnv_type()+" "+ file_name +" "+ envModel.getFromdate()+" "+envModel.getTodate()+" "+envModel.getEmail();
+			else
+				command="python3.4 " + "artifact_comparator.py " + envModel.getEnv_name_cd_ci()+" "+envModel.getEnv_type()+" "+ file_name +" "+ envModel.getFromdate()+" "+envModel.getTodate()+" "+envModel.getEmail();
 			}
 			else if(envModel.getSelection_type().equals("us"))
 					command="python3.4 " + "user_story.py " + envModel.getEnv_name()+" "+ file_name +" "+envModel.getUser_story()+" "+envModel.getEmail();

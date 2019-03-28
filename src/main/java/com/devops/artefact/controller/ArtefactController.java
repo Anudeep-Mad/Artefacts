@@ -26,17 +26,18 @@ import com.devops.artefact.service.ArtifactService;
 
 @Controller
 public class ArtefactController {
-	
+
 	@Autowired
 	public ArtifactService artifactService;
-	 
+
 	@RequestMapping("/")
 	public String index(Model model) {
 		model.addAttribute("envModel",new EnvModel());
 		model.addAttribute("env_var",Artifact_Constants.env_var);
+		model.addAttribute("env_var_cd_ci",Artifact_Constants.env_var_cd_ci);
 		return "home";
 	}
-	
+
 	/*@PostMapping(value="/welcome")
 	public String welcome(@ModelAttribute("envModel") EnvModel envModel) throws IOException {
 		return artifactService.Compare(envModel);
@@ -44,8 +45,8 @@ public class ArtefactController {
 	@PostMapping(value="/welcome")
 	public void welcome(@ModelAttribute("envModel") EnvModel envModel,HttpServletResponse response) throws IOException {
 		String current_ts = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date(System.currentTimeMillis()));
-		File file = new File("/home/amedishetti/Artifact_Comparator/sp/compare_"+current_ts+".txt");
-		artifactService.Compare_2(envModel,"/home/amedishetti/Artifact_Comparator/sp/compare_"+current_ts+".txt" );
+		File file = new File("/home/infa/Artifact_Comparator/sp/compare_"+current_ts+".txt");
+		artifactService.Compare_2(envModel,"/home/infa/Artifact_Comparator/sp/compare_"+current_ts+".txt" );
 		//return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getName() + "\"").body(file);
 		response.addHeader("Content-disposition", "attachment;filename=compare_"+current_ts+".txt");
 		response.setContentType("application/pdf");
@@ -55,26 +56,26 @@ public class ArtefactController {
 		IOUtils.copy(myStream, response.getOutputStream());
 		response.flushBuffer();
 	}
-	
-	
+
+
 	@PostMapping(value="/compareByDates")
 	@ResponseBody
 	public String validateDeployment(@RequestBody EnvModel envModel) throws IOException {
 		return artifactService.Compare(envModel);
 	}
-	
+
 	@PostMapping(value="/compareByUserStory")
 	@ResponseBody
 	public String validateDeploymentByUserStory(@RequestBody EnvModel envModel) throws IOException {
 		return artifactService.Compare(envModel);
 	}
-	
+
 	@PostMapping(value="/compareForFile")
 	@ResponseBody
 	public void sendCompFile(@RequestBody EnvModel envModel, HttpServletResponse response) throws IOException {
 		String current_ts = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date(System.currentTimeMillis()));
-		File file = new File("/home/amedishetti/Artifact_Comparator/sp/compare_"+current_ts+".txt");
-		artifactService.Compare_2(envModel,"/home/amedishetti/Artifact_Comparator/sp/compare_"+current_ts+".txt" );
+		File file = new File("/home/infa/Artifact_Comparator/sp/compare_"+current_ts+".txt");
+		artifactService.Compare_2(envModel,"/home/infa/Artifact_Comparator/sp/compare_"+current_ts+".txt" );
 		//return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getName() + "\"").body(file);
 		response.addHeader("Content-disposition", "attachment;filename=compare_"+current_ts+".txt");
 		response.setContentType("application/pdf");
